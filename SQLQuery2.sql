@@ -1,0 +1,207 @@
+USE [master]
+GO
+/****** Object:  Database [bdbibliotecanovo]    Script Date: 27/01/2026 17:38:56 ******/
+CREATE DATABASE [bdbibliotecanovo]
+CONTAINMENT = NONE
+ON  PRIMARY 
+( NAME = N'bdbibliotecanovo', FILENAME = N'C:\Program Files\Microsoft SQL Server\MSSQL16.MSSQLSERVER\MSSQL\DATA\bdbibliotecanovo.mdf' , SIZE = 8192KB , MAXSIZE = UNLIMITED, FILEGROWTH = 65536KB )
+LOG ON 
+( NAME = N'bdbibliotecanovo_log', FILENAME = N'C:\Program Files\Microsoft SQL Server\MSSQL16.MSSQLSERVER\MSSQL\DATA\bdbibliotecanovo_log.ldf' , SIZE = 73728KB , MAXSIZE = 2048GB , FILEGROWTH = 65536KB )
+WITH CATALOG_COLLATION = DATABASE_DEFAULT, LEDGER = OFF
+GO
+ALTER DATABASE [bdbibliotecanovo] SET COMPATIBILITY_LEVEL = 160
+GO
+IF (1 = FULLTEXTSERVICEPROPERTY('IsFullTextInstalled'))
+begin
+EXEC [bdbibliotecanovo].[dbo].[sp_fulltext_database] @action = 'enable'
+end
+GO
+ALTER DATABASE [bdbibliotecanovo] SET ANSI_NULL_DEFAULT OFF 
+GO
+ALTER DATABASE [bdbibliotecanovo] SET ANSI_NULLS OFF 
+GO
+ALTER DATABASE [bdbibliotecanovo] SET ANSI_PADDING OFF 
+GO
+ALTER DATABASE [bdbibliotecanovo] SET ANSI_WARNINGS OFF 
+GO
+ALTER DATABASE [bdbibliotecanovo] SET ARITHABORT OFF 
+GO
+ALTER DATABASE [bdbibliotecanovo] SET AUTO_CLOSE OFF 
+GO
+ALTER DATABASE [bdbibliotecanovo] SET AUTO_SHRINK OFF 
+GO
+ALTER DATABASE [bdbibliotecanovo] SET AUTO_UPDATE_STATISTICS ON 
+GO
+ALTER DATABASE [bdbibliotecanovo] SET CURSOR_CLOSE_ON_COMMIT OFF 
+GO
+ALTER DATABASE [bdbibliotecanovo] SET CURSOR_DEFAULT  GLOBAL 
+GO
+ALTER DATABASE [bdbibliotecanovo] SET CONCAT_NULL_YIELDS_NULL OFF 
+GO
+ALTER DATABASE [bdbibliotecanovo] SET NUMERIC_ROUNDABORT OFF 
+GO
+ALTER DATABASE [bdbibliotecanovo] SET QUOTED_IDENTIFIER OFF 
+GO
+ALTER DATABASE [bdbibliotecanovo] SET RECURSIVE_TRIGGERS OFF 
+GO
+ALTER DATABASE [bdbibliotecanovo] SET  DISABLE_BROKER 
+GO
+ALTER DATABASE [bdbibliotecanovo] SET AUTO_UPDATE_STATISTICS_ASYNC OFF 
+GO
+ALTER DATABASE [bdbibliotecanovo] SET DATE_CORRELATION_OPTIMIZATION OFF 
+GO
+ALTER DATABASE [bdbibliotecanovo] SET TRUSTWORTHY OFF 
+GO
+ALTER DATABASE [bdbibliotecanovo] SET ALLOW_SNAPSHOT_ISOLATION OFF 
+GO
+ALTER DATABASE [bdbibliotecanovo] SET PARAMETERIZATION SIMPLE 
+GO
+ALTER DATABASE [bdbibliotecanovo] SET READ_COMMITTED_SNAPSHOT OFF 
+GO
+ALTER DATABASE [bdbibliotecanovo] SET HONOR_BROKER_PRIORITY OFF 
+GO
+ALTER DATABASE [bdbibliotecanovo] SET RECOVERY FULL 
+GO
+ALTER DATABASE [bdbibliotecanovo] SET  MULTI_USER 
+GO
+ALTER DATABASE [bdbibliotecanovo] SET PAGE_VERIFY CHECKSUM  
+GO
+ALTER DATABASE [bdbibliotecanovo] SET DB_CHAINING OFF 
+GO
+ALTER DATABASE [bdbibliotecanovo] SET FILESTREAM( NON_TRANSACTED_ACCESS = OFF ) 
+GO
+ALTER DATABASE [bdbibliotecanovo] SET TARGET_RECOVERY_TIME = 60 SECONDS 
+GO
+ALTER DATABASE [bdbibliotecanovo] SET DELAYED_DURABILITY = DISABLED 
+GO
+ALTER DATABASE [bdbibliotecanovo] SET ACCELERATED_DATABASE_RECOVERY = OFF  
+GO
+ALTER DATABASE [bdbibliotecanovo] SET QUERY_STORE = ON
+GO
+ALTER DATABASE [bdbibliotecanovo] SET QUERY_STORE (OPERATION_MODE = READ_WRITE, CLEANUP_POLICY = (STALE_QUERY_THRESHOLD_DAYS = 30), DATA_FLUSH_INTERVAL_SECONDS = 900, INTERVAL_LENGTH_MINUTES = 60, MAX_STORAGE_SIZE_MB = 1000, QUERY_CAPTURE_MODE = AUTO, SIZE_BASED_CLEANUP_MODE = AUTO, MAX_PLANS_PER_QUERY = 200, WAIT_STATS_CAPTURE_MODE = ON)
+GO
+USE [bdbibliotecanovo]
+GO
+/****** Object:  Table [dbo].[Alunos]    Script Date: 27/01/2026 17:38:56 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Alunos](
+	[id_aluno] [int] IDENTITY(1,1) NOT NULL,
+	[aluno_nome] [varchar](80) NOT NULL,
+	[aluno_CPF] [varchar](14) NOT NULL,
+	[aluno_celular] [varchar](11) NOT NULL,
+	[aluno_renda] [decimal](12, 2) NOT NULL,
+	[aluno_nascimento] [datetime] NOT NULL,
+	[aluno_datacad] [datetime2](7) NOT NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[id_aluno] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Autores]    Script Date: 27/01/2026 17:38:56 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Autores](
+	[id_autor] [int] IDENTITY(1,1) NOT NULL,
+	[nome_autor] [varchar](100) NOT NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[id_autor] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Editoras]    Script Date: 27/01/2026 17:38:56 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Editoras](
+	[id_editora] [int] IDENTITY(1,1) NOT NULL,
+	[editora_nome] [varchar](100) NOT NULL,
+	[editora_endereco] [varchar](200) NOT NULL,
+	[editora_telefone] [varchar](20) NOT NULL,
+	[editora_email] [varchar](100) NOT NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[id_editora] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Emprestimos]    Script Date: 27/01/2026 17:38:56 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Emprestimos](
+	[id_emprestimo] [int] IDENTITY(1,1) NOT NULL,
+	[id_aluno] [int] NOT NULL,
+	[data_emprestimo] [date] NOT NULL,
+	[data_devolucao] [date] NOT NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[id_emprestimo] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Itens_Emprestimo]    Script Date: 27/01/2026 17:38:56 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Emprestimo_Itens](
+	[id_emprestimo] [int] NOT NULL,
+	[id_livro] [int] NOT NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[id_emprestimo] ASC,
+	[id_livro] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Livros]    Script Date: 27/01/2026 17:38:56 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Livros](
+	[id_livro] [int] IDENTITY(1,1) NOT NULL,
+	[livro_titulo] [varchar](150) NOT NULL,
+	[id_autor] [int] NOT NULL,
+	[id_editora] [int] NOT NULL,
+	[isbn] [varchar](20) NOT NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[id_livro] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY],
+UNIQUE NONCLUSTERED 
+(
+	[isbn] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+ALTER TABLE [dbo].[Alunos] ADD  DEFAULT (sysdatetime()) FOR [aluno_datacad]
+GO
+ALTER TABLE [dbo].[Emprestimos]  WITH CHECK ADD FOREIGN KEY([id_aluno])
+REFERENCES [dbo].[Alunos] ([id_aluno])
+GO
+ALTER TABLE [dbo].[Emprestimo_Itens]  WITH CHECK ADD FOREIGN KEY([id_emprestimo])
+REFERENCES [dbo].[Emprestimos] ([id_emprestimo])
+GO
+ALTER TABLE [dbo].[Emprestimo_Itens]  WITH CHECK ADD FOREIGN KEY([id_livro])
+REFERENCES [dbo].[Livros] ([id_livro])
+GO
+ALTER TABLE [dbo].[Livros]  WITH CHECK ADD FOREIGN KEY([id_autor])
+REFERENCES [dbo].[Autores] ([id_autor])
+GO
+ALTER TABLE [dbo].[Livros]  WITH CHECK ADD FOREIGN KEY([id_editora])
+REFERENCES [dbo].[Editoras] ([id_editora])
+GO
+USE [master]
+GO
+ALTER DATABASE [bdbibliotecanovo] SET  READ_WRITE 
+GO
