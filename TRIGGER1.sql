@@ -25,12 +25,44 @@ AS
    END
 END;
 
-  SELECT * FROM 
+  SELECT * FROM Funcionario
+  SELECT * FROM LOG_SALARIO
 
   UPDATE Funcionario
 	SET FuncionarioNome = 'SEBASTIÃO SALGADO'
 	WHERE FuncionarioID = 
 
   UPDATE Funcionario
-	SET FuncionarioSalario = 20000
+	SET FuncionarioSalario = 14000
 	WHERE FuncionarioID = 14 
+
+------------------------------------
+
+VIEW - SQL CADASTRO NO OBJETO
+PROCEDURE -SQL CADASTRO QUE EU POSSO CHAMAR TODA A HORA
+TRIGGER - SQL CADASTRO QUE DISPARA QUANDO TEM UM EVENTO
+
+/* OPERAÇÕES ARITMÉTICAS COM DADOS */
+
+-- SUM -> SOMA OS VALORES DOS CAMPOS
+
+SELECT SUM (FuncionarioSalario) AS TOTALFOLHA,
+	   SUM (FuncionarioSalario) * 12 AS VALORANUAL
+FROM Funcionario
+
+-- AVG -> CALCULAR A MÉDIA
+SELECT AVG(FuncionarioSalario) AS MEDIASSALARIAL
+FROM Funcionario
+
+--COUNT -> CONTA QUANTOS REGISTRO TEM
+SELECT COUNT(FuncionarioSalario ) AS TOTALFUNCIONAIOS
+FROM Funcionario
+
+/* GROUP BY - FAZ AGRUPAMENTO DOS VALORES EM CAMPO */
+
+SELECT CARGO.CargoDescricao,
+	   SUM(Funcionario.FuncionarioSalario) AS TOTAL
+FROM Funcionario
+	 LEFT OUTER JOIN CARGO
+	 ON funcionario.CargoId = Cargo.CargoId
+GROUP BY CARGO.CargoDescricao
