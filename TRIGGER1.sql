@@ -65,4 +65,4 @@ SELECT CARGO.CargoDescricao,
 FROM Funcionario
 	 LEFT OUTER JOIN CARGO
 	 ON funcionario.CargoId = Cargo.CargoId
-GROUP BY CARGO.CargoDescricao
+GROUP BY rollup (CARGO.CargoDescricao)
